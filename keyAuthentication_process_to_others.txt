@@ -1,0 +1,45 @@
+enabling private keybased login process to saii(he is external user, added to the server)
+
+admin should ask saii for public key
+root user can create a folder .ssh in /home/saii
+	ownership of the folder should be on saii
+
+inside .ssh we need to create a file called authorized_keys
+	this file owner should be sai
+
+
+
+with root access folow below steps
+
+cd /home/saii/
+mkdir .ssh
+chown -R saii:saii .ssh ----->here -R means regressive.
+chmod 700 -R .ssh/
+cd .ssh
+touch authorized_keys
+vim authorized_keys -->inside place the saii public key properly and save the file make sure that no extra spaces
+chown saii:saii authorized_keys
+chmod 400 authorized_keys
+ls -l
+cd
+
+then some configurations needs to change
+vim /etc/ssh/sshd_config
+uncomment PubkeyAuthentication yes and save it
+sshd -t
+systemctl restart sshd
+
+
+===========validation========
+ssh saii@18.215.172.139
+saii123
+ssh -i /D/OM_NARAYANA_ADI_NARAYANA/saii/saii.pem saii@18.215.172.139
+
+
+=================================================================================================================
+actually here I have one challenge saii not able to edit files of ec2-user files even with aceess also..what to do?
+
+is it possible to give give root rights to saii?
+
+
+
