@@ -1,2 +1,2 @@
 # Linux
-Required Linux skills for a DevSecOps engineer
+Linux skills for a DevSecOps engineer
