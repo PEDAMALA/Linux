@@ -1,0 +1,59 @@
+Creat Keypair using git bash on your local machine
+	ssh-keygen -f <please provide file name>
+	ssh-keygen -f sai
+
+the above cooamnd generatres two files
+	sai
+	sai.pub
+here we are renamining sai file as sai.pem (because it ia private key)s
+
+once private key is generated go to aws clod portal and launch the server.
+	https://aws.amazon.com/
+	login with your credentials as root user
+	upload public key of sai
+	then go to EC2 instance dashboard
+	click on launch instance
+	provide servername
+	select IAM 
+		AWS Linux 2023 AMI
+	instance type is 
+		t3.micro/t2.micro
+	select security group
+	select traffic
+	lauch.
+
+once server is launched try to login to the server with Git bash
+	open Git bash
+	go to the path where sai's private key is available.
+	ssh -i <private key file name> <user ID>@<Ip address)
+	ssh -i sai.pem ec2-user@public IP address
+	if you are able to loggin. kudos we have successfully created server.
+
+turn on sudo su mode
+	add pavan as user to the server
+		useradd pavan
+	set passwd
+		set passwd
+	add DevSecOps group
+		groupadd DeSecOps
+	add pavan to DevSecOps group
+		usermod -g DevSecOps pavan
+	now enable the Password Autentication option pavan so that he can loggin with his passwd.
+		vim /etc/ssh/sshd_config
+		uncomment  Password Autentication and proved yes in that line.
+	once it is done test the file, wheather all chages are applied properly or not.
+		sshd -t
+		systemctl restart sshd
+
+
+Now we are checking wheather pavan is able to login to the server ot not
+	open git bash
+	ssh -i pavan @Ipaddresss
+	passwd
+	if you are able to loggin. kudos we have successfully add pavan to the server.
+
+
+
+	
+
+	 
